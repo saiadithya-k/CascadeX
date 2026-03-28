@@ -1,115 +1,161 @@
-# CascadeX // Decentralized Cognitive Causality Financial Engine
+# CascadeX
 
-Real-time decentralized financial risk analysis system with reusable modular layers:
+Financial Risk Intelligence platform for real-time network risk monitoring, explainable causal analysis, contagion simulation, and intervention planning.
 
-- Cognitive layer for per-user behavioral risk scoring
-- Network layer with user dependency graph (NetworkX)
-- Causal rule engine for explainable risk changes
-- Dynamic risk propagation across connected users
-- Counterfactual simulator for what-if interventions
-- Intervention ranking to reduce systemic risk
-- Hash-based blockchain-style immutable event log
-- Simulated IoT updates for continuous state refresh
-- Live risk graph visualization with Plotly
+CascadeX combines behavioral signals and graph dynamics into a live operational dashboard designed for analyst workflows and executive decision support.
 
-## Real-Time Workflow
+## Why CascadeX
 
-The system is designed for live state updates, not a static demo flow.
+- Real-time risk updates from user and relationship events
+- Explainable risk decomposition (income, activity, variability, network influence)
+- Dynamic propagation modeling across connected entities
+- What-if simulation and intervention optimization
+- Blockchain-style immutable event timeline
+- Interactive Streamlit dashboard with Plotly network visuals
+- Scalable execution path for 50 to 500+ users
 
-1. Initialize with 5 to 10 users and relationship data.
-2. Apply live user upserts or relationship upserts.
-3. Push IoT-style activity events continuously.
-4. Recompute risk, causes, propagation, and interventions in real time.
+## Core Capabilities
 
-## Data Requirements
+1. Data ingestion and validation for users and relationships
+2. Hybrid risk modeling (rule-based plus ML probability)
+3. Causal adjustment with human-readable explanations
+4. Multi-step network propagation
+5. Counterfactual simulation and trajectory analysis
+6. Intervention ranking by systemic impact
+7. Stability classification: stable, fragile, critical
+8. Optional analyst narrative generation through Groq
 
-### User fields
+## Tech Stack
 
-- user_id
-- income
-- activity (0.0 to 1.0)
-- transactions
-- defaults
+- Python 3.10+
+- Streamlit
+- NetworkX
+- Plotly
+- NumPy, Pandas, scikit-learn
 
-### Relationship fields
+## Quick Start
 
-- source
-- target
-- weight
-- relation_type
+### 1) Install
 
-Constraint: active graph must contain 5 to 10 users for risk computation.
-
-## Install
-
-1. Create and activate your Python environment.
-2. Install dependencies:
-
+```bash
 pip install -r requirements.txt
+```
 
-## Run
+### 2) Run locally
 
+```bash
 streamlit run app.py
+```
 
-## Expert Analyst Report (LLM)
+### 3) Open dashboard
 
-Set your Groq API key via environment variable (recommended):
+Visit `http://localhost:8501` in your browser.
 
-Windows PowerShell:
+## Streamlit Cloud Deployment
 
-$env:GROQ_API_KEY = "your_key_here"
+1. Push this repository to GitHub.
+2. Open Streamlit Community Cloud.
+3. Create a new app with:
+	 - Branch: `main`
+	 - Main file path: `app.py`
+4. Add secrets in app settings:
 
-Then generate a professional 2-paragraph risk assessment from live pipeline output:
+```toml
+GROQ_API_KEY = "your_real_key"
+```
 
-c:/Users/saiad/OneDrive/Documents/PROJECT/.venv/Scripts/python.exe generate_expert_report.py
+Reference template: `.streamlit/secrets.toml.example`.
 
-Notes:
-- The key is read from GROQ_API_KEY and is not hardcoded in source files.
-- Prompt construction logic is in dccfe/analyst_report.py.
+## Data Contracts
 
-## Output Provided
+### Users CSV
 
-- Risk score for each user node
-- Risk propagation graph with node-level risk coloring
-- Human-readable risk explanation per user
-- Counterfactual outcomes after changing income and activity
-- Ranked interventions by expected systemic risk reduction
-- Immutable blockchain log of risk and action events
+Required columns:
 
-## Full Scaling Mode (50 to 500+ Users)
+- `user_id`
+- `income` (must be `> 0`)
+- `activity` (range `0..1`)
+- `transactions` (non-negative integer)
+- `defaults` (non-negative integer)
 
-Run the scalable pipeline with synthetic or external datasets while preserving explainability:
+### Relationships CSV
 
-python -c "from dccfe import ScalingConfig, run_full_scaling_mode; r=run_full_scaling_mode(config=ScalingConfig(user_count=500, network_mode='preferential_attachment')); print(r['system_summary']); print(r['top_risky_nodes'][:3])"
+Required columns:
 
-Features in scaling mode:
-- Large network generation (50, 100, 500+ users)
-- Random or scale-free relationship generation
-- Cached adjacency for fast neighbor lookup
-- Batch diffusion updates with bounded iterations (max 10)
-- Partial graph visualization for large networks
-- Aggregated metrics (histogram, top risk, centrality ranking)
-- Shortlist intervention optimization
-- Key-event logging control for memory stability
-- System-level plus critical-node report generation
+- `source`
+- `target`
+- `weight`
+- `relation_type`
 
-Scaling output schema:
+Recommended `weight` range is `0..1` for normalized influence semantics.
 
+## Project Structure
+
+```text
+app.py                          # Main Streamlit dashboard
+dccfe/engine.py                 # Orchestration layer
+dccfe/cognitive.py              # Risk scoring logic
+dccfe/causal_engine.py          # Causal contribution updates
+dccfe/propagation.py            # Diffusion engine
+dccfe/intervention.py           # Intervention optimization
+dccfe/visualization.py          # Graph visualization utilities
+dccfe/analyst_report.py         # LLM report generation
+dccfe/scaling.py                # Large-scale execution mode
+```
+
+## Output Model
+
+Primary pipeline and validation outputs include:
+
+```json
 {
-	"system_summary": {...},
-	"top_risky_nodes": [...],
-	"intervention": {...},
-	"stability": {...}
+	"system_summary": {},
+	"node_results": [],
+	"intervention": {},
+	"reports": {},
+	"validation_status": true
 }
+```
 
-## Architecture
+## Validation and Quality
 
-- app.py: real-time UI for ingestion, updates, simulation, and visualization
-- dccfe/engine.py: orchestration across all layers
-- dccfe/cognitive.py: lightweight explainable risk scoring
-- dccfe/network_layer.py: graph node and edge management
-- dccfe/causal_engine.py: causal rule application
-- dccfe/propagation.py: dynamic contagion propagation
-- dccfe/intervention.py: critical node analysis and intervention ranking
-- dccfe/blockchain.py: hash-chain event logging
-- dccfe/visualization.py: interactive graph rendering
+Comprehensive end-to-end validation is available through:
+
+```bash
+python validate_end_to_end.py
+```
+
+This checks data quality, model behavior, graph integrity, causal and propagation correctness, simulation consistency, intervention impact, stability metrics, edge cases, and performance.
+
+## Scaling Mode
+
+Run a high-volume scenario:
+
+```bash
+python run_full_scaling_mode.py
+```
+
+Or from Python:
+
+```python
+from dccfe import ScalingConfig, run_full_scaling_mode
+
+result = run_full_scaling_mode(
+		config=ScalingConfig(
+				user_count=500,
+				network_mode="preferential_attachment",
+				average_degree=8,
+		)
+)
+print(result["system_summary"])
+```
+
+## Security Notes
+
+- Keep `.streamlit/secrets.toml` out of source control.
+- Use environment variables or Streamlit Cloud secrets for API keys.
+- Do not hardcode credentials in scripts or notebooks.
+
+## License
+
+Use and adapt for research, demonstration, and internal analytics workflows.
