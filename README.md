@@ -1,4 +1,4 @@
-# DCCFE - Decentralized Cognitive Causality Financial Engine
+# CascadeX // Decentralized Cognitive Causality Financial Engine
 
 Real-time decentralized financial risk analysis system with reusable modular layers:
 

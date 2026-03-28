@@ -1,0 +1,253 @@
+{
+  "system_summary": {
+    "average_risk": 0.730441,
+    "variance": 0.015784,
+    "high_risk_nodes": 4,
+    "network_size": 6,
+    "system_state": "critical",
+    "performance_300_users_seconds": 0.064
+  },
+  "node_results": [
+    {
+      "user_id": "U1",
+      "income": 2200.0,
+      "activity": 0.28,
+      "transactions": 5,
+      "defaults": 1,
+      "base_risk": 0.63599,
+      "risk": 0.888075
+    },
+    {
+      "user_id": "U6",
+      "income": 1900.0,
+      "activity": 0.22,
+      "transactions": 10,
+      "defaults": 1,
+      "base_risk": 0.713818,
+      "risk": 0.868098
+    },
+    {
+      "user_id": "U4",
+      "income": 2700.0,
+      "activity": 0.37,
+      "transactions": 8,
+      "defaults": 0,
+      "base_risk": 0.41096,
+      "risk": 0.749702
+    },
+    {
+      "user_id": "U2",
+      "income": 3600.0,
+      "activity": 0.63,
+      "transactions": 6,
+      "defaults": 0,
+      "base_risk": 0.25275,
+      "risk": 0.700175
+    },
+    {
+      "user_id": "U5",
+      "income": 4600.0,
+      "activity": 0.71,
+      "transactions": 9,
+      "defaults": 0,
+      "base_risk": 0.227936,
+      "risk": 0.656168
+    },
+    {
+      "user_id": "U3",
+      "income": 5200.0,
+      "activity": 0.84,
+      "transactions": 7,
+      "defaults": 0,
+      "base_risk": 0.163283,
+      "risk": 0.520428
+    }
+  ],
+  "intervention": {
+    "best_node": "U2",
+    "impact_score": 0.307028,
+    "baseline_total_risk": 4.382646,
+    "optimized_total_risk": 4.075618
+  },
+  "reports": {
+    "analyst_prompt_length": 2137,
+    "local_report": "User U1 has high risk driven mainly by income / activity. Network influence is elevated, and the observed trend is escalating.\n\nSystem state is fragile with average risk 0.73. Recommend targeted support for U1, U2 and close monitoring to reduce cascade pressure.",
+    "llm_status": "skipped_no_api_key"
+  },
+  "validation_status": false,
+  "final_verdict": "Issues Found",
+  "issues": [
+    "1_DATA_VALIDATION: Edge weights outside [0,1] detected (3 edges), e.g. [('U1', 'U2', 1.2), ('U2', 'U4', 1.1)]"
+  ],
+  "section_status": {
+    "1_DATA_VALIDATION": false,
+    "2_RISK_MODEL_VALIDATION": true,
+    "3_GRAPH_VALIDATION": true,
+    "4_CAUSAL_ENGINE_VALIDATION": true,
+    "5_PROPAGATION_VALIDATION": true,
+    "6_SIMULATION_VALIDATION": true,
+    "7_INTERVENTION_VALIDATION": true,
+    "8_SYSTEM_STABILITY": true,
+    "9_AI_REPORT_VALIDATION": true,
+    "10_UI_VALIDATION": true,
+    "11_EDGE_CASE_TESTING": true,
+    "12_PERFORMANCE_CHECK": true
+  },
+  "section_details": {
+    "1_DATA_VALIDATION": {
+      "user_count": 6,
+      "edge_count": 7,
+      "invalid_edge_count": 0,
+      "weights_out_of_range": 3
+    },
+    "2_RISK_MODEL_VALIDATION": {
+      "model_backend": "numpy-fallback",
+      "test_accuracy": 0.8333,
+      "sample_hybrid_risk": 0.89032
+    },
+    "3_GRAPH_VALIDATION": {
+      "nodes": 6,
+      "edges": 7,
+      "sample_neighbors": {
+        "U1": [
+          "U2",
+          "U6"
+        ]
+      }
+    },
+    "4_CAUSAL_ENGINE_VALIDATION": {
+      "nodes_with_explanations": 6
+    },
+    "5_PROPAGATION_VALIDATION": {
+      "step1": {
+        "A": 0.32000000000000006,
+        "B": 0.6800000000000002
+      },
+      "final_range": [
+        0.3625564336776733,
+        0.6374435663223267
+      ]
+    },
+    "6_SIMULATION_VALIDATION": {
+      "target_user": "U1",
+      "baseline_risk": 0.888075,
+      "scenario_risk": 0.682007,
+      "trajectory_steps": 3
+    },
+    "7_INTERVENTION_VALIDATION": {
+      "best_node": "U2",
+      "improvement": 0.307028,
+      "top_suggestion": {
+        "node": "U2",
+        "systemic_risk_reduction": 0.105247,
+        "expected_total_risk": 4.2774
+      }
+    },
+    "8_SYSTEM_STABILITY": {
+      "average_network_risk": 0.730441,
+      "risk_variance": 0.015784,
+      "high_risk_nodes": 4,
+      "system_stability_score": 0.44914,
+      "classification": "fragile"
+    },
+    "9_AI_REPORT_VALIDATION": {
+      "llm_status": "skipped_no_api_key",
+      "local_report_preview": "User U1 has high risk driven mainly by income / activity. Network influence is elevated, and the observed trend is escalating.\n\nSystem state is fragile with average risk 0.73. Reco..."
+    },
+    "10_UI_VALIDATION": {
+      "checked_markers": 9,
+      "missing": []
+    },
+    "11_EDGE_CASE_TESTING": {
+      "extreme_prediction": 0.885948
+    },
+    "12_PERFORMANCE_CHECK": {
+      "elapsed_seconds": 0.064,
+      "user_count": 300
+    }
+  },
+  "scaling_summary": {
+    "top_risky_nodes": [
+      {
+        "user_id": "U205",
+        "risk": 0.663866,
+        "degree_centrality": 0.013378
+      },
+      {
+        "user_id": "U101",
+        "risk": 0.65327,
+        "degree_centrality": 0.016722
+      },
+      {
+        "user_id": "U189",
+        "risk": 0.638862,
+        "degree_centrality": 0.016722
+      },
+      {
+        "user_id": "U98",
+        "risk": 0.637342,
+        "degree_centrality": 0.013378
+      },
+      {
+        "user_id": "U135",
+        "risk": 0.635603,
+        "degree_centrality": 0.016722
+      }
+    ],
+    "stability": {
+      "classification": "fragile",
+      "average_risk": 0.557778,
+      "risk_variance": 0.001369,
+      "high_risk_nodes": 0,
+      "risk_distribution": {
+        "0.0-0.2": 0,
+        "0.2-0.4": 0,
+        "0.4-0.6": 268,
+        "0.6-0.8": 32,
+        "0.8-1.0": 0
+      },
+      "centrality_ranking": [
+        {
+          "user_id": "U1",
+          "degree_centrality": 0.254181
+        },
+        {
+          "user_id": "U8",
+          "degree_centrality": 0.160535
+        },
+        {
+          "user_id": "U9",
+          "degree_centrality": 0.150502
+        },
+        {
+          "user_id": "U6",
+          "degree_centrality": 0.12709
+        },
+        {
+          "user_id": "U7",
+          "degree_centrality": 0.120401
+        },
+        {
+          "user_id": "U19",
+          "degree_centrality": 0.113712
+        },
+        {
+          "user_id": "U13",
+          "degree_centrality": 0.103679
+        },
+        {
+          "user_id": "U11",
+          "degree_centrality": 0.093645
+        },
+        {
+          "user_id": "U22",
+          "degree_centrality": 0.090301
+        },
+        {
+          "user_id": "U10",
+          "degree_centrality": 0.086957
+        }
+      ]
+    }
+  }
+}

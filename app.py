@@ -14,7 +14,7 @@ from dccfe.analyst_report import AnalystReportContext, generate_analyst_report
 from dccfe.visualization import build_partial_risk_figure, build_risk_figure
 
 
-st.set_page_config(page_title="DCCFE - Financial Risk Intelligence", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="CascadeX - Financial Risk Intelligence", layout="wide", initial_sidebar_state="expanded")
 
 
 def _apply_custom_theme() -> None:
@@ -289,6 +289,22 @@ def _apply_custom_theme() -> None:
             background-clip: text;
         }
 
+        .hero-title-main {
+            display: inline-block;
+        }
+
+        .hero-title-accent {
+            display: inline-block;
+            margin-top: 0.25rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.15;
+            background: linear-gradient(90deg, #f6c453, #ffd700, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .hero-sub {
             margin-top: 0.75rem;
             color: var(--text-soft);
@@ -376,7 +392,10 @@ _apply_custom_theme()
 st.markdown(
     """
     <div class="hero-block">
-        <div class="hero-title">🧠 DCCFE - Financial Risk Intelligence</div>
+        <div class="hero-title">
+            <span class="hero-title-main">🌈 CascadeX</span><br>
+            <span class="hero-title-accent">Financial Risk Intelligence</span>
+        </div>
         <div class="hero-sub">Real-time network risk analysis, monitoring & intervention planning with cognitive behavior analysis</div>
     </div>
     """,
@@ -1010,7 +1029,7 @@ with col_dl1:
     st.download_button(
         label="📥 Export Blockchain Log",
         data=json.dumps(engine.blockchain.tail(200), indent=2),
-        file_name="dccfe_blockchain_log.json",
+        file_name="cascadex_blockchain_log.json",
         mime="application/json",
         use_container_width=True,
     )
@@ -1021,7 +1040,7 @@ with col_dl2:
         st.download_button(
             label="📥 Export Risk Table",
             data=risk_csv,
-            file_name="dccfe_risk_table.csv",
+            file_name="cascadex_risk_table.csv",
             mime="text/csv",
             use_container_width=True,
         )

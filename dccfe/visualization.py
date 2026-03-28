@@ -167,7 +167,7 @@ def _build_enhanced_figure(graph: nx.Graph, title: str) -> go.Figure:
 
 
 def build_risk_figure(graph: nx.Graph) -> go.Figure:
-    return _build_enhanced_figure(graph, title="DCCFE Network Risk Propagation")
+    return _build_enhanced_figure(graph, title="CascadeX Network Risk Propagation")
 
 
 def build_partial_risk_figure(
@@ -187,7 +187,7 @@ def build_partial_risk_figure(
     keep = set([str(n) for n in risk_ranked[: int(top_risk_nodes)]] + [str(n) for n in central_ranked[: int(top_central_nodes)]])
     subgraph = graph.subgraph(keep).copy()
     fig = build_risk_figure(subgraph)
-    fig.update_layout(title=f"DCCFE Partial Risk View ({subgraph.number_of_nodes()} of {graph.number_of_nodes()} nodes)")
+    fig.update_layout(title=f"CascadeX Partial Risk View ({subgraph.number_of_nodes()} of {graph.number_of_nodes()} nodes)")
     return fig
 
 
